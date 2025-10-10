@@ -28,6 +28,10 @@
   "browserslist": [
     "last 2 versions"
   ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "dependencies": {
     "postcss-scss": "^4.0.9"
   }
