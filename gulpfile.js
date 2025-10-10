@@ -2,7 +2,7 @@ const fs           = require('fs');
 const browserSync  = require('browser-sync').create();
 const gulp         = require('gulp');
 const _autoprefixer = require('gulp-autoprefixer');
-const autoprefixer = (_autoprefixer && _autoprefixer.default) ? _autoprefixer.default : _autoprefixer;
+const autoprefixer = _autoprefixer && _autoprefixer.default ? _autoprefixer.default : _autoprefixer;
 const cleanCSS     = require('gulp-clean-css');
 const include      = require('gulp-include');
 const eslint       = require('gulp-eslint-new');
@@ -13,6 +13,9 @@ const sass         = require('gulp-sass')(require('sass'));
 const uglify       = require('gulp-uglify');
 const stylelint = require('stylelint');
 const merge        = require('merge');
+const {
+  exec
+} = require('child_process');
 
 
 let config = {
@@ -51,13 +54,13 @@ function lintSCSS(src) {
   }).then((result) => {
     if (result.errored) {
       // Print formatted output; do not throw to keep the build non-blocking.
-      console.log(result.output); // eslint-disable-line no-console
+      console.log(result.output);
     } else if (result.output) {
-      console.log(result.output); // eslint-disable-line no-console
+      console.log(result.output);
     }
     return Promise.resolve();
   }).catch((err) => {
-    console.log(err.stack || err); // eslint-disable-line no-console
+    console.log(err.stack || err);
     return Promise.resolve();
   });
 }
@@ -86,14 +89,23 @@ function buildCSS(src, dest) {
 function lintJS(src, dest) {
   dest = dest || config.src.jsPath;
   // Use ESLint CLI to avoid stream completion issues with gulp.
-  const { exec } = require('child_process');
   const globs = Array.isArray(src) ? src.join(' ') : src;
   const cmd = `npx eslint --fix ${globs}`;
 
   return new Promise((resolve) => {
-    exec(cmd, { maxBuffer: 1024 * 1024 }, (err, stdout, stderr) => {
-      if (stdout) console.log(stdout); // eslint-disable-line no-console
-      if (stderr) console.error(stderr); // eslint-disable-line no-console
+    exec(cmd, {
+      maxBuffer: 1024 * 1024
+    }, (err, stdout, stderr) => {
+      if (err) {
+        // Log the error object so maintainers can inspect failures from the CLI
+        console.error('ESLint CLI execution error:', err);
+      }
+      if (stdout) {
+        console.log(stdout);
+      }
+      if (stderr) {
+        console.error(stderr);
+      }
       // Resolve regardless of errors to keep build moving; maintainers should
       // inspect output and fix lint errors as needed.
       resolve();
@@ -109,7 +121,7 @@ function buildJS(src, dest) {
     .pipe(include({
       includePaths: [config.packagesPath, config.src.jsPath]
     }))
-    .on('error', console.log) // eslint-disable-line no-console
+    .on('error', console.log)
     .pipe(babel())
     .pipe(uglify())
     .pipe(rename({
