@@ -1,0 +1,23 @@
+name: README check
+
+on:
+  push:
+    branches: [ main, chore/upgrade-deps ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check README exists and is non-empty
+        run: |
+          if [ ! -f README.md ]; then
+            echo "README.md not found"; exit 1;
+          fi
+          len=$(wc -c < README.md)
+          if [ "$len" -lt 20 ]; then
+            echo "README.md is too small ($len bytes)"; exit 1;
+          fi
+          echo "README.md is present ($len bytes)"
