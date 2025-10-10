@@ -56,7 +56,7 @@ Note that compiled, minified css and js {{edit this list if the plugin doesn't i
 7. Run `gulp watch` to continuously watch changes to scss and js files.{{edit this list if the plugin doesn't include css/js!}}  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when plugin files change.
 
 = Other Notes =
-* This plugin's README.md file is automatically generated. Please only make modifications to the README.txt file, and make sure the `gulp readme` command has been run before committing README changes.  See the [contributing guidelines](https://github.com/UCF/{{My-Project}}/blob/master/CONTRIBUTING.md) for more information.
+* Maintain `README.md` directly in this repository. Do not rely on any automated generation step for the README — edit and commit `README.md` as needed.
 
 
 == Contributing ==
