@@ -29,8 +29,14 @@
     "last 2 versions"
   ],
   "scripts": {
+    "build": "gulp default",
+    "watch": "gulp watch",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format:css": "stylelint \"src/scss/**/*.scss\" --fix"
+  },
+  "engines": {
+    "node": ">=16 <=20"
   },
   "dependencies": {
     "postcss-scss": "^4.0.9"

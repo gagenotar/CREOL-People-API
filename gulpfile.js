@@ -209,4 +209,6 @@ gulp.task('watch', (done) => {
 //
 // Default task
 //
-gulp.task('default', gulp.series('css', 'js', 'readme'));
+// 'readme' task removed intentionally; README.md is maintained directly.
+// Default task should only run css and js build steps.
+gulp.task('default', gulp.series('css', 'js'));

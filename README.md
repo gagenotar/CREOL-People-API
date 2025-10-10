@@ -58,6 +58,39 @@ Note that compiled, minified css and js {{edit this list if the plugin doesn't i
 = Other Notes =
 * Maintain `README.md` directly in this repository. Do not rely on any automated generation step for the README — edit and commit `README.md` as needed.
 
+## Development setup
+
+Quick start to get the project ready for local development.
+
+Prerequisites:
+- Node.js 16 - 20 (this project uses features compatible with Node 16+)
+- npm (bundled with Node) or a compatible package manager
+- Optional: gulp-cli globally if you prefer `gulp` over `npx gulp`
+
+Install dependencies:
+
+1. Clone the repo and cd into it.
+2. Install Node modules:
+
+    npm ci
+
+Build assets:
+
+    npm run build
+
+Watch for changes during development (compiles and optionally BrowserSync):
+
+    npm run watch
+
+Linting:
+
+    npm run lint
+    npm run lint:fix
+
+Notes:
+- To enable BrowserSync, copy `gulp-config.template.json` to `gulp-config.json` and set `sync` to `true` and `syncTarget` to your local WordPress URL. `gulp-config.json` is ignored by git by default.
+- If your environment runs Node 22 (like this devcontainer), npm may warn about engine mismatch; the builds should still work but for local parity use Node 16-20.
+
 
 == Contributing ==
 
