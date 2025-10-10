@@ -98,7 +98,7 @@ Adhering to the following process is the best way to submit a pull request:
 
     If you're making changes to scss or js files, make sure you're minifying **and committing** those minified file changes.  scss and js file processing should be performed using gulp commands provided in the repo (see [gulpfile.js](https://github.com/UCF/{{My-Project}}/blob/master/gulpfile.js))
 
-    Additionally, make sure that any changes to the README are made in `README.txt`, NOT `README.md`.  The `README.md` file is generated automatically via the `gulp readme` task.  If you have any README updates to include with your changes, please make sure to run `gulp readme` so that both files get updated.
+   Additionally, make sure that any changes to the README are made in `README.md`. We no longer auto-generate `README.md` from `README.txt`; maintain `README.md` directly and commit it with your changes.
 
 6. Locally merge the upstream `rc-*` or `master` branch (whichever you branched off of initially) into your topic branch:
 

@@ -179,14 +179,7 @@ gulp.task('js', gulp.series('es-lint-plugin', 'js-build-plugin'));
 // Documentation
 //
 
-gulp.task('readme', () => {
-  // Previously used gulp-readme-to-markdown (deprecated). Use simple copy/rename
-  // so README.md exists and maintainers can regenerate it outside of gulp if
-  // they prefer a more advanced tool.
-  return gulp.src('README.txt', { allowEmpty: true })
-    .pipe(rename('README.md'))
-    .pipe(gulp.dest('.'));
-});
+// README generation removed: maintain `README.md` directly in the repo.
 
 
 //
