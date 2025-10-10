@@ -153,7 +153,7 @@ Use [CSS-Tricks' Sass Style Guide](https://css-tricks.com/sass-style-guide/) for
 - All generated color pallettes and font sizes/weights should comply with [WCAG 2.0 AA contrast guidelines](https://www.w3.org/TR/WCAG20/#visual-audio-contrast) in their default state.  Components and utilities with hover/focus/active states should try to comply with these contrast requirements whenever possible.
 - Except in rare cases, don't remove default `:focus` styles (via e.g. `outline: none;`) without providing alternative styles. See [this A11Y Project post](http://a11yproject.com/posts/never-remove-css-outlines/) for more details.
 
-New/modified Sass code should not throw any Sass-lint errors.  We recommend using a [Sass-lint integration with your IDE of choice](https://www.npmjs.com/package/sass-lint#ide-integration) to show linter warnings/errors as you code.  This repo includes a Sass-lint config file with the desired linter rulesets for this project.
+New/modified Sass code should adhere to the project's style rules. We now use `stylelint` for SCSS linting. We recommend integrating stylelint with your IDE to show linter warnings/errors as you code. The repo's `stylelint` config is in `.stylelintrc.json`.
 
 ### JS
 

@@ -1,7 +1,8 @@
 const fs           = require('fs');
 const browserSync  = require('browser-sync').create();
 const gulp         = require('gulp');
-const autoprefixer = require('gulp-autoprefixer');
+const _autoprefixer = require('gulp-autoprefixer');
+const autoprefixer = (_autoprefixer && _autoprefixer.default) ? _autoprefixer.default : _autoprefixer;
 const cleanCSS     = require('gulp-clean-css');
 const include      = require('gulp-include');
 const eslint       = require('gulp-eslint-new');
@@ -10,6 +11,7 @@ const babel        = require('gulp-babel');
 const rename       = require('gulp-rename');
 const sass         = require('gulp-sass')(require('sass'));
 const uglify       = require('gulp-uglify');
+const stylelint = require('stylelint');
 const merge        = require('merge');
 
 
@@ -40,11 +42,24 @@ if (fs.existsSync('./gulp-config.json')) {
 //
 
 // Base SCSS linting function
-// SCSS lint was previously handled by `gulp-sass-lint` which is deprecated.
-// Replace with a no-op lint task or integrate a modern linter separately.
+// SCSS linting using stylelint via gulp-stylelint
 function lintSCSS(src) {
-  // No-op: return stream so gulp tasks that depend on lintSCSS still work.
-  return gulp.src(src, { allowEmpty: true });
+  // Use stylelint Node API to lint files. Returns a promise.
+  return stylelint.lint({
+    files: src,
+    configFile: '.stylelintrc.json'
+  }).then((result) => {
+    if (result.errored) {
+      // Print formatted output; do not throw to keep the build non-blocking.
+      console.log(result.output); // eslint-disable-line no-console
+    } else if (result.output) {
+      console.log(result.output); // eslint-disable-line no-console
+    }
+    return Promise.resolve();
+  }).catch((err) => {
+    console.log(err.stack || err); // eslint-disable-line no-console
+    return Promise.resolve();
+  });
 }
 
 // Base SCSS compile function
@@ -70,13 +85,20 @@ function buildCSS(src, dest) {
 // Base JS linting function (with eslint). Fixes problems in-place.
 function lintJS(src, dest) {
   dest = dest || config.src.jsPath;
+  // Use ESLint CLI to avoid stream completion issues with gulp.
+  const { exec } = require('child_process');
+  const globs = Array.isArray(src) ? src.join(' ') : src;
+  const cmd = `npx eslint --fix ${globs}`;
 
-  return gulp.src(src)
-    .pipe(eslint({
-      fix: true
-    }))
-    .pipe(eslint.format())
-    .pipe(isFixed(dest));
+  return new Promise((resolve) => {
+    exec(cmd, { maxBuffer: 1024 * 1024 }, (err, stdout, stderr) => {
+      if (stdout) console.log(stdout); // eslint-disable-line no-console
+      if (stderr) console.error(stderr); // eslint-disable-line no-console
+      // Resolve regardless of errors to keep build moving; maintainers should
+      // inspect output and fix lint errors as needed.
+      resolve();
+    });
+  });
 }
 
 // Base JS compile function
