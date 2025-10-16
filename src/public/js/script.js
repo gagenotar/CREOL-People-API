@@ -1,7 +1,7 @@
 /**
  * CREOL People API Frontend JavaScript
  * 
- * Handles interactive features like card clicks and loading states
+ * Handles interactive features like card loading states
  */
 (function() {
     'use strict';
@@ -38,47 +38,6 @@
                 card.style.transform = 'translateY(0)';
             }, index * 50); // 50ms delay between each card
         });
-    }
-
-    /**
-     * Setup click handlers for person cards
-     */
-    function setupCardClickHandlers() {
-        document.addEventListener('click', function(e) {
-            var card = e.target.closest && e.target.closest('.creol-person-card');
-            
-            // Don't handle clicks if user is clicking a link
-            if (e.target.tagName === 'A' || e.target.closest('a')) {
-                return;
-            }
-            
-            if (!card) {
-                return;
-            }
-            
-            // Future enhancement: could open modal with detailed info
-            // For now, just add a subtle interaction feedback
-            handleCardClick(card);
-        });
-    }
-
-    /**
-     * Handle card click with visual feedback
-     */
-    function handleCardClick(card) {
-        // Add active class for visual feedback
-        card.classList.add('creol-person-card-active');
-        
-        setTimeout(function() {
-            card.classList.remove('creol-person-card-active');
-        }, 200);
-        
-        // Future: Dispatch custom event for extensibility
-        var event = new CustomEvent('creolPersonCardClick', {
-            detail: { card: card },
-            bubbles: true
-        });
-        card.dispatchEvent(event);
     }
 
     /**

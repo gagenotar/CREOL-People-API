@@ -20,7 +20,6 @@
 .creol-people-loading{position:relative;opacity:0.6;pointer-events:none}
 .creol-loading-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #0073aa;border-radius:50%;animation:creol-spin 1s linear infinite;z-index:10}
 @keyframes creol-spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
-.creol-person-card-active{transform:scale(0.98);transition:transform 0.2s ease}
 
 /* Grid display mode: more compact rows without images */
 .creol-people-grid-mode .creol-person-card{flex-direction:row;align-items:center;padding:0.5rem}
