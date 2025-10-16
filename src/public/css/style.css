@@ -1,0 +1,55 @@
+/* Base styles */
+.creol-people-grid{display:grid;grid-template-columns:repeat(var(--creol-columns,3),1fr);gap:1rem;margin:0;padding:0}
+.creol-person-card{background:#fff;border:1px solid #e6e6e6;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.2s ease}
+.creol-person-card:hover{box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+.creol-person-card img{max-width:100%;height:auto}
+.creol-person-image img{width:100%;height:auto;display:block;object-fit:cover}
+.creol-person-body{padding:0.5rem}
+.creol-person-name{font-size:1rem;margin:0 0 0.25rem;font-weight:600}
+.creol-person-position{font-size:0.875rem;color:#666;margin-bottom:0.25rem}
+.creol-person-email{font-size:0.875rem;margin-bottom:0.25rem}
+.creol-person-email a{color:#0073aa;text-decoration:none}
+.creol-person-email a:hover{text-decoration:underline}
+.creol-person-phone,.creol-person-room{font-size:0.875rem;color:#444;margin-bottom:0.25rem}
+.creol-people-error,.creol-people-empty{color:#900;padding:0.5rem;background:#fee;border:1px solid #fcc;border-radius:4px}
+
+/* Accessibility: Screen reader only text */
+.screen-reader-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+
+/* Loading states and animations */
+.creol-people-loading{position:relative;opacity:0.6;pointer-events:none}
+.creol-loading-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #0073aa;border-radius:50%;animation:creol-spin 1s linear infinite;z-index:10}
+@keyframes creol-spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+.creol-person-card-active{transform:scale(0.98);transition:transform 0.2s ease}
+
+/* Grid display mode: more compact rows without images */
+.creol-people-grid-mode .creol-person-card{flex-direction:row;align-items:center;padding:0.5rem}
+.creol-people-grid-mode .creol-person-image{display:none}
+.creol-people-grid-mode .creol-person-body{padding:0 0.5rem}
+
+/* Responsive breakpoints */
+/* Tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .creol-people-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+    .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"]{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .creol-people-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem}
+    .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"]{grid-template-columns:repeat(2,1fr)}
+    .creol-person-body{padding:0.75rem}
+    .creol-person-name{font-size:0.95rem}
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .creol-people-grid{grid-template-columns:1fr;gap:0.5rem}
+    .creol-person-body{padding:1rem}
+    .creol-person-name{font-size:1.1rem}
+    .creol-person-position,.creol-person-email,.creol-person-phone,.creol-person-room{font-size:0.9rem}
+    
+    /* Grid mode adjustments for mobile */
+    .creol-people-grid-mode .creol-person-card{flex-direction:column;align-items:flex-start}
+    .creol-people-grid-mode .creol-person-body{padding:1rem;width:100%}
+}

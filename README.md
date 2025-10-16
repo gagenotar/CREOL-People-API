@@ -1,64 +1,184 @@
-=== {{My Project}} ===
-Contributors: ucfwebcom
-Requires at least: 5.3 {{Update as needed!}}
-Tested up to: 5.3 {{Update as needed!}}
-Stable tag: 0.0.0
-Requires PHP: 7.4 {{Update as needed!}}
-License: GPLv3 or later
-License URI: http://www.gnu.org/copyleft/gpl-3.0.html
+# CREOL People API
 
-{{Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.}}
+A WordPress plugin that displays people in a customizable grid layout using data from the CREOL API.
 
+## Description
 
-== Description ==
+The CREOL People API plugin provides a simple shortcode to display staff, faculty, or other personnel from the CREOL (College of Optics and Photonics) database. The plugin fetches data from the CREOL API and displays it in a responsive grid layout with customizable options.
 
-{{This is the long description.  No limit, and you can use Markdown (as well as in the following sections).}}
+## Features
 
+- **Flexible Display Modes**: Choose between card view (with images) or compact grid view
+- **Responsive Design**: Automatically adapts to different screen sizes
+- **Smart Caching**: Reduces API calls with configurable transient caching
+- **Group Filtering**: Filter people by one or two group names
+- **Highly Customizable**: Control columns, limits, and display modes via shortcode attributes
 
-== Documentation ==
+## Installation
 
-Head over to the [{{My Project}} wiki](https://github.com/UCF/{{My-Project}}/wiki) for detailed information about this plugin, installation instructions, and more.
+### From GitHub
 
+1. Download the plugin files or clone this repository:
+   ```bash
+   git clone https://github.com/UCF/CREOL-People-API.git
+   ```
 
-== Changelog ==
+2. Upload the `CREOL-People-API` folder to your `/wp-content/plugins/` directory
 
-= 1.0.0 = {{Update number as needed!}}
-* Initial release
+3. Activate the plugin through the 'Plugins' menu in WordPress
 
+### Manual Installation
 
-== Upgrade Notice ==
+1. Download the ZIP file from the releases page
+2. In WordPress admin, go to Plugins > Add New > Upload Plugin
+3. Choose the ZIP file and click "Install Now"
+4. Activate the plugin
 
-n/a
+## Usage
 
+### Basic Shortcode
 
-== Development ==
+Display all people from a specific group:
 
-Note that compiled, minified css and js {{edit this list if the plugin doesn't include css/js!}} files are included within the repo.  Changes to these files should be tracked via git (so that users installing the plugin using traditional installation methods will have a working plugin out-of-the-box.)
+```
+[creol_people grpname1="Faculty"]
+```
 
-[Enabling debug mode](https://codex.wordpress.org/Debugging_in_WordPress) in your `wp-config.php` file is recommended during development to help catch warnings and bugs.
+### Advanced Examples
 
-= Requirements =
-* node v16+
-* gulp-cli
+**Display with two group filters:**
+```
+[creol_people grpname1="Faculty" grpname2="Optics"]
+```
 
-= Instructions =
-1. Clone the {{My-Project}} repo into your local development environment, within your WordPress installation's `plugins/` directory: `git clone https://github.com/UCF/{{My-Project}}.git`
-2. `cd` into the new {{My-Project}} directory, and run `npm install` to install required packages for development into `node_modules/` within the repo
-3. Optional: If you'd like to enable [BrowserSync](https://browsersync.io) for local development, or make other changes to this project's default gulp configuration, copy `gulp-config.template.json`, make any desired changes, and save as `gulp-config.json`.
+**Limit the number of results:**
+```
+[creol_people grpname1="Staff" limit="6"]
+```
 
-    To enable BrowserSync, set `sync` to `true` and assign `syncTarget` the base URL of a site on your local WordPress instance that will use this plugin, such as `http://localhost/wordpress/my-site/`.  Your `syncTarget` value will vary depending on your local host setup.
+**Use compact grid mode (no images):**
+```
+[creol_people grpname1="Faculty" display="grid"]
+```
 
-    The full list of modifiable config values can be viewed in `gulpfile.js` (see `config` variable).
-3. Run `gulp default` to process front-end assets.
-4. If you haven't already done so, create a new WordPress site on your development environment to test this plugin against{{IF THIS PLUGIN REQUIRES OTHER PLUGINS:}}, and [install and activate all plugin dependencies](https://github.com/UCF/{{My-Project}}/wiki/Installation#installation-requirements){{ENDIF}}.
-5. Activate this plugin on your development WordPress site.
-6. Configure plugin settings from the WordPress admin under "{{Your plugin's admin menu label}}".
-7. Run `gulp watch` to continuously watch changes to scss and js files.{{edit this list if the plugin doesn't include css/js!}}  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when plugin files change.
+**Custom column layout:**
+```
+[creol_people grpname1="Faculty" columns="4"]
+```
 
-= Other Notes =
-* Maintain `README.md` directly in this repository. Do not rely on any automated generation step for the README — edit and commit `README.md` as needed.
+**Combine multiple options:**
+```
+[creol_people grpname1="Faculty" grpname2="Research" display="card" columns="3" limit="12"]
+```
 
+**Custom cache duration (in seconds):**
+```
+[creol_people grpname1="Staff" cache_ttl="600"]
+```
 
-== Contributing ==
+## Shortcode Attributes
 
-Want to submit a bug report or feature request?  Check out our [contributing guidelines](https://github.com/UCF/{{My-Project}}/blob/master/CONTRIBUTING.md) for more information.  We'd love to hear from you!
+| Attribute | Description | Default | Values |
+|-----------|-------------|---------|--------|
+| `grpname1` | Primary group name to filter by | _(empty)_ | Any group name |
+| `grpname2` | Secondary group name to filter by | _(empty)_ | Any group name |
+| `limit` | Maximum number of people to display | `0` (all) | Any positive integer |
+| `display` | Display mode | `card` | `card`, `grid` |
+| `columns` | Number of grid columns | `3` | `1` to `6` |
+| `cache_ttl` | Cache duration in seconds | `300` (5 min) | Any positive integer |
+
+### Attribute Aliases
+
+For convenience, the following aliases are supported (case-insensitive):
+- `grpname1`, `grp1`, `GrpName1` (all equivalent)
+- `grpname2`, `grp2`, `GrpName2` (all equivalent)
+
+## Display Modes
+
+### Card Mode (default)
+Shows a full card for each person including:
+- Profile image
+- Name
+- Position/Title
+- Email address
+- Phone number
+- Room number
+
+### Grid Mode
+Displays a compact grid without images, showing only:
+- Name
+- Position/Title
+- Email address
+- Phone number
+- Room number
+
+## Styling
+
+The plugin includes default styles that can be overridden in your theme. Key CSS classes:
+
+- `.creol-people-grid` - Main container
+- `.creol-people-grid-mode` - Applied when using grid display mode
+- `.creol-person-card` - Individual person card
+- `.creol-person-image` - Image container
+- `.creol-person-body` - Text content container
+- `.creol-person-name` - Person's name
+- `.creol-person-position` - Job title/position
+- `.creol-person-email` - Email address
+- `.creol-person-phone` - Phone number
+- `.creol-person-room` - Room number
+
+### Custom CSS Example
+
+```css
+/* Override card styles in your theme */
+.creol-person-card {
+    border: 2px solid #000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.creol-person-name {
+    color: #003366;
+    font-size: 1.2rem;
+}
+```
+
+## Caching
+
+The plugin uses WordPress transients to cache API responses, reducing load times and API calls. The default cache duration is 5 minutes (300 seconds), but can be customized per shortcode using the `cache_ttl` attribute.
+
+To clear the cache:
+- Transients are automatically cleared after the TTL expires
+- Manually delete transients using a plugin like "Transients Manager"
+- Use WP-CLI: `wp transient delete --all`
+
+## Requirements
+
+- WordPress 5.0 or higher
+- PHP 7.0 or higher
+- Active internet connection to fetch data from CREOL API
+
+## Support
+
+For bugs, feature requests, or contributions, please visit the [GitHub repository](https://github.com/UCF/CREOL-People-API).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this plugin.
+
+## License
+
+This plugin is licensed under GPL3. See the main plugin file for full license information.
+
+## Changelog
+
+### 1.0.0
+- Initial release
+- Shortcode implementation with group filtering
+- Card and grid display modes
+- Responsive grid layout
+- Transient caching support
+- Customizable columns and limits
+
+## Credits
+
+Developed by UCF Web Communications for the University of Central Florida.

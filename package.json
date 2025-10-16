@@ -1,37 +1,36 @@
 {
-  "private": true,
-  "devDependencies": {
-    "@babel/core": "^7.28.4",
-    "@babel/eslint-parser": "^7.28.4",
-    "@babel/preset-env": "^7.28.3",
-    "@eslint/eslintrc": "^3.3.1",
-    "browser-sync": "^3.0.4",
-    "eslint": "^9.37.0",
-    "eslint-plugin-jsdoc": "^61.1.0",
-    "gulp": "^5.0.1",
-    "gulp-autoprefixer": "^10.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-eslint-if-fixed": "^1.0.0",
-    "gulp-eslint-new": "^2.5.0",
-    "gulp-include": "^2.4.1",
-    "gulp-rename": "^2.1.0",
-    "gulp-sass": "~6.0.1",
-    
-    "gulp-uglify": "^3.0.2",
-    "merge": "^2.1.1",
-    "sass": "^1.93.2",
-    "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.1",
-    "stylelint-scss": "^6.12.1"
+  "name": "creol-people-api",
+  "version": "1.0.0",
+  "description": "WordPress plugin to display people from the CREOL API in a customizable grid layout",
+  "main": "creol-people-api.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:css": "echo \"CSS watch mode - use your preferred CSS preprocessor here\"",
+    "watch:js": "echo \"JS watch mode - use your preferred JS bundler here\"",
+    "build": "echo \"Build production assets\"",
+    "lint:css": "echo \"Lint CSS files\"",
+    "lint:js": "echo \"Lint JavaScript files\"",
+    "lint": "npm run lint:css && npm run lint:js"
   },
-  "browserslist": [
-    "last 2 versions"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UCF/CREOL-People-API.git"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "api",
+    "people",
+    "directory",
+    "creol",
+    "ucf"
   ],
-  "dependencies": {
-    "postcss-scss": "^4.0.9"
-  }
-  ,"overrides": {
-    "postcss": "^8.4.31"
-  }
+  "author": "UCF Web Communications",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/UCF/CREOL-People-API/issues"
+  },
+  "homepage": "https://github.com/UCF/CREOL-People-API#readme",
+  "devDependencies": {},
+  "dependencies": {}
 }
