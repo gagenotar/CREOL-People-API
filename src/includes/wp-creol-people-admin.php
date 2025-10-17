@@ -84,8 +84,8 @@ class CREOL_People_Admin {
             $sanitized['default_columns'] = absint( $input['default_columns'] );
             if ( $sanitized['default_columns'] < 1 ) {
                 $sanitized['default_columns'] = 1;
-            } elseif ( $sanitized['default_columns'] > 6 ) {
-                $sanitized['default_columns'] = 6;
+            } elseif ( $sanitized['default_columns'] > 8 ) {
+                $sanitized['default_columns'] = 8;
             }
         }
 
@@ -130,7 +130,7 @@ class CREOL_People_Admin {
         $value = isset( $options['default_columns'] ) ? $options['default_columns'] : 3;
         ?>
         <select name="creol_people_api_options[default_columns]">
-            <?php for ( $i = 1; $i <= 6; $i++ ) : ?>
+            <?php for ( $i = 1; $i <= 8; $i++ ) : ?>
                 <option value="<?php echo $i; ?>" <?php selected( $value, $i ); ?>>
                     <?php echo $i; ?>
                 </option>
@@ -219,7 +219,7 @@ class CREOL_People_Admin {
                 <li><strong>grpname2</strong>: Secondary group filter</li>
                 <li><strong>limit</strong>: Maximum number of people to display</li>
                 <li><strong>display</strong>: Display mode (card or grid)</li>
-                <li><strong>columns</strong>: Number of grid columns (1-6)</li>
+                <li><strong>columns</strong>: Number of grid columns (1-8)</li>
                 <li><strong>cache_ttl</strong>: Cache duration in seconds</li>
             </ul>
 
