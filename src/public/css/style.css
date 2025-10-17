@@ -34,8 +34,8 @@
     .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(4,1fr)}
 }
 
-/* Tablets */
-@media (max-width: 768px) {
+/* Smaller tablets and larger mobile phones */
+@media (max-width: 767px) {
     .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:0.75rem}
     .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
     .creol-person-body{padding:0.75rem}
