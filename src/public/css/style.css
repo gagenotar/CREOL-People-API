@@ -22,6 +22,13 @@
 .creol-loading-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #0073aa;border-radius:50%;animation:creol-spin 1s linear infinite;z-index:10}
 @keyframes creol-spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
 
+/* Dark mode styles */
+.creol-people-dark .creol-person-card{background:#2c2c2c;border:1px solid #444;color:#ddd}
+.creol-people-dark .creol-person-name{color:#fff}
+.creol-people-dark .creol-person-position,.creol-people-dark .creol-person-phone,.creol-people-dark .creol-person-room{color:#bbb}
+.creol-people-dark .creol-person-email a{color:#66aaff}
+.creol-people-dark .creol-people-error,.creol-people-dark .creol-people-empty{background:#330000;border:1px solid #660000;color:#ffcccc}
+
 /* Grid display mode: more compact rows without images */
 .creol-people-grid-mode .creol-person-card{flex-direction:row;align-items:center;padding:0.5rem}
 .creol-people-grid-mode .creol-person-image{display:none}

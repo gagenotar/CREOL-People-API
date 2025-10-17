@@ -47,6 +47,7 @@ class CREOL_People_Shortcode {
             'cache_ttl' => isset( $saved_options['default_cache_ttl'] ) ? $saved_options['default_cache_ttl'] : $this->cache_ttl,
             'display' => isset( $saved_options['default_display'] ) ? $saved_options['default_display'] : 'card',
             'columns' => isset( $saved_options['default_columns'] ) ? $saved_options['default_columns'] : 3,
+            'dark_mode' => isset( $saved_options['default_dark_mode'] ) ? $saved_options['default_dark_mode'] : 0,
         );
         $atts = wp_parse_args( $atts, $defaults );
 
@@ -62,6 +63,7 @@ class CREOL_People_Shortcode {
         }
         $limit = intval( $atts['limit'] );
         $cache_ttl = intval( $atts['cache_ttl'] );
+        $dark = intval( $atts['dark_mode'] );
 
         // Build API URL
         $base = 'https://api.creol.ucf.edu/People.asmx/GetData';
@@ -129,6 +131,9 @@ class CREOL_People_Shortcode {
         $container_class = 'creol-people-grid';
         if ( 'grid' === $display ) {
             $container_class .= ' creol-people-grid-mode';
+        }
+        if ( $dark ) {
+            $container_class .= ' creol-people-dark';
         }
         // set CSS variable for columns so CSS can adapt across modes
         $out = '<div class="' . esc_attr( $container_class ) . '" style="--creol-columns:' . esc_attr( $columns ) . '" role="list" aria-label="People directory">';
