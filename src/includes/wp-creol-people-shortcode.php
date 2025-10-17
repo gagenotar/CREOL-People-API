@@ -176,12 +176,12 @@ class CREOL_People_Shortcode {
         $phone = isset( $person['Phone'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Phone'] ) ) : '';
         $room = isset( $person['Room'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Room'] ) ) : '';
 
-        $out = '<article class="creol-person-card" role="listitem" itemscope itemtype="https://schema.org/Person">';
+        $out = '<article class="creol-person-card align-items-start" role="listitem" itemscope itemtype="https://schema.org/Person">';
         // In 'grid' display mode we exclude the image to show a compact grid of info
         if ( 'card' === $display && $image ) {
             $out .= '<div class="creol-person-image"><img src="' . $image . '" alt="' . esc_attr( $name ) . '" itemprop="image"></div>';
         }
-        $out .= '<div class="creol-person-body" style="align-items: flex-start;">';
+        $out .= '<div class="creol-person-body align-items-start">';
         $out .= '<h3 class="creol-person-name text-center" itemprop="name">' . esc_html( $name ) . '</h3>';
         if ( $position ) {
             $out .= '<div class="creol-person-position text-center" itemprop="jobTitle">' . $position . '</div>';
