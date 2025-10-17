@@ -54,11 +54,11 @@ class CREOL_People_Shortcode {
         $grp2 = sanitize_text_field( $atts['grpname2'] );
         $display = sanitize_text_field( $atts['display'] );
         $columns = intval( $atts['columns'] );
-        // Clamp columns to 1..6
+        // Clamp columns to 1..8
         if ( $columns < 1 ) {
             $columns = 1;
-        } elseif ( $columns > 6 ) {
-            $columns = 6;
+        } elseif ( $columns > 8 ) {
+            $columns = 8;
         }
         $limit = intval( $atts['limit'] );
         $cache_ttl = intval( $atts['cache_ttl'] );

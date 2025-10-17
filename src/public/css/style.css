@@ -31,13 +31,13 @@
 /* Tablets and smaller desktops */
 @media (max-width: 1024px) {
     .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:1rem}
-    .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(4,1fr)}
+    .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(4,1fr)}
 }
 
 /* Smaller tablets and larger mobile phones */
 @media (max-width: 767px) {
     .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:0.75rem}
-    .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
+    .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
     .creol-person-body{padding:0.75rem}
     .creol-person-name{font-size:0.95rem}
 }
@@ -45,7 +45,7 @@
 /* Mobile phones */
 @media (max-width: 480px) {
     .creol-people-grid{grid-template-columns:1fr;gap:0.5rem}
-    .creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(1,1fr)}
+    .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
     .creol-person-body{padding:1rem}
     .creol-person-name{font-size:1.1rem}
     .creol-person-position,.creol-person-email,.creol-person-phone,.creol-person-room{font-size:0.9rem}
