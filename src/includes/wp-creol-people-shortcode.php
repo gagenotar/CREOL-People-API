@@ -182,18 +182,18 @@ class CREOL_People_Shortcode {
             $out .= '<div class="creol-person-image"><img src="' . $image . '" alt="' . esc_attr( $name ) . '" itemprop="image"></div>';
         }
         $out .= '<div class="creol-person-body">';
-        $out .= '<h3 class="creol-person-name" itemprop="name">' . esc_html( $name ) . '</h3>';
+        $out .= '<h3 class="creol-person-name text-center" itemprop="name">' . esc_html( $name ) . '</h3>';
         if ( $position ) {
-            $out .= '<div class="creol-person-position" itemprop="jobTitle">' . $position . '</div>';
+            $out .= '<div class="creol-person-position text-center" itemprop="jobTitle">' . $position . '</div>';
         }
         if ( $email ) {
-            $out .= '<div class="creol-person-email"><a href="mailto:' . esc_attr( $email ) . '" itemprop="email" aria-label="Email ' . esc_attr( $name ) . '">Email</a></div>';
+            $out .= '<div class="creol-person-email text-center"><a href="mailto:' . esc_attr( $email ) . '" itemprop="email" aria-label="Email ' . esc_attr( $name ) . '">Email</a></div>';
         }
         if ( $phone ) {
-            $out .= '<div class="creol-person-phone" itemprop="telephone"><span class="screen-reader-text">Phone: </span>' . esc_html( $phone ) . '</div>';
+            $out .= '<div class="creol-person-phone text-center" itemprop="telephone"><span class="screen-reader-text">Phone: </span>' . esc_html( $phone ) . '</div>';
         }
         if ( $room ) {
-            $out .= '<div class="creol-person-room"><span class="screen-reader-text">Room: </span>' . esc_html( $room ) . '</div>';
+            $out .= '<div class="creol-person-room text-center"><span class="screen-reader-text">Room: </span>' . esc_html( $room ) . '</div>';
         }
         $out .= '</div>'; // body
         $out .= '</article>'; // card
