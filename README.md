@@ -12,7 +12,7 @@ The CREOL People API plugin provides a simple shortcode to display staff, facult
 - **Responsive Design**: Automatically adapts to different screen sizes
 - **Smart Caching**: Reduces API calls with configurable transient caching
 - **Group Filtering**: Filter people by one or two group names
-- **Highly Customizable**: Control columns, limits, and display modes via shortcode attributes
+- **Highly Customizable**: Control columns, limits, color scheme, and display modes via shortcode attributes
 
 ## Installation
 
@@ -86,6 +86,9 @@ Display all people from a specific group:
 | `display` | Display mode | `card` | `card`, `grid` |
 | `columns` | Number of grid columns | `3` | `1` to `6` |
 | `cache_ttl` | Cache duration in seconds | `300` (5 min) | Any positive integer |
+| `include_positions` | Include specific positions | _(empty)_ | Any position name |
+| `exclude_positions` | Exclude specific positions | _(empty)_ | Any position name |
+| `dark_mode` | Set theme to dark | `0` | `0` (off) or `1` (on) |
 
 ### Attribute Aliases
 
@@ -170,6 +173,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 This plugin is licensed under GPL3. See the main plugin file for full license information.
 
 ## Changelog
+
+### 1.1.0
+- Dark mode attribute
+- Include/exclude positions
+- Up to 8 cols
+- Updated responsive design
+- Minor UI/UX improvements
 
 ### 1.0.0
 - Initial release
