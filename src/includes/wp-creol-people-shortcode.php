@@ -187,7 +187,7 @@ class CREOL_People_Shortcode {
             $out .= '<div class="creol-person-position" itemprop="jobTitle">' . $position . '</div>';
         }
         if ( $email ) {
-            $out .= '<div class="creol-person-email"><a href="mailto:' . esc_attr( $email ) . '" itemprop="email" aria-label="Email ' . esc_attr( $name ) . '">' . esc_html( $email ) . '</a></div>';
+            $out .= '<div class="creol-person-email"><a href="mailto:' . esc_attr( $email ) . '" itemprop="email" aria-label="Email ' . esc_attr( $name ) . '">Email</a></div>';
         }
         if ( $phone ) {
             $out .= '<div class="creol-person-phone" itemprop="telephone"><span class="screen-reader-text">Phone: </span>' . esc_html( $phone ) . '</div>';
