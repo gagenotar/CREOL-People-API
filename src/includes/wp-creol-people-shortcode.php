@@ -43,6 +43,8 @@ class CREOL_People_Shortcode {
         $defaults = array(
             'grpname1' => '',
             'grpname2' => '',
+            'included_positions' => '',
+            'excluded_positions' => '',
             'limit' => 0,
             'cache_ttl' => isset( $saved_options['default_cache_ttl'] ) ? $saved_options['default_cache_ttl'] : $this->cache_ttl,
             'display' => isset( $saved_options['default_display'] ) ? $saved_options['default_display'] : 'card',
@@ -53,6 +55,8 @@ class CREOL_People_Shortcode {
 
         $grp1 = sanitize_text_field( $atts['grpname1'] );
         $grp2 = sanitize_text_field( $atts['grpname2'] );
+        $included_positions = sanitize_text_field( $atts['included_positions'] );
+        $excluded_positions = sanitize_text_field( $atts['excluded_positions'] );
         $display = sanitize_text_field( $atts['display'] );
         $columns = intval( $atts['columns'] );
         // Clamp columns to 1..8
@@ -74,6 +78,12 @@ class CREOL_People_Shortcode {
         }
         if ( $grp2 !== '' ) {
             $params[] = 'GrpName2=' . rawurlencode( $grp2 );
+        }
+        if ( $included_positions !== '' ) {
+            $params[] = 'IncludedPositions=' . rawurlencode( $included_positions );
+        }
+        if ( $excluded_positions !== '' ) {
+            $params[] = 'ExcludedPositions=' . rawurlencode( $excluded_positions );
         }
         $url = $base . '?' . implode( '&', $params );
 
