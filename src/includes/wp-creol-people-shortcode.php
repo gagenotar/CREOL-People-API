@@ -181,7 +181,7 @@ class CREOL_People_Shortcode {
         if ( 'card' === $display && $image ) {
             $out .= '<div class="creol-person-image"><img src="' . $image . '" alt="' . esc_attr( $name ) . '" itemprop="image"></div>';
         }
-        $out .= '<div class="creol-person-body">';
+        $out .= '<div class="creol-person-body" style="align-items: flex-start;">';
         $out .= '<h3 class="creol-person-name text-center" itemprop="name">' . esc_html( $name ) . '</h3>';
         if ( $position ) {
             $out .= '<div class="creol-person-position text-center" itemprop="jobTitle">' . $position . '</div>';
