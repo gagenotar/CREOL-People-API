@@ -10,7 +10,7 @@ class CREOL_People_Shortcode {
     private $cache_ttl = 300; // seconds
 
     public function __construct() {
-        add_shortcode( 'creol_people', array( $this, 'render_shortcode' ) );
+        add_shortcode( 'creol_people_api', array( $this, 'render_shortcode' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
     }
 
@@ -69,9 +69,7 @@ class CREOL_People_Shortcode {
         $cache_ttl = intval( $atts['cache_ttl'] );
         $dark = intval( $atts['dark_mode'] );
 
-        // Build API URL
-        $base = 'https://api.creol.ucf.edu/People.asmx/GetData';
-        // API expects 'WWWPeople' then GrpName1/GrpName2 parameters
+        // Build API params
         $params = array( 'WWWPeople' );
         if ( $grp1 !== '' ) {
             $params[] = 'GrpName1=' . rawurlencode( $grp1 );
@@ -87,36 +85,12 @@ class CREOL_People_Shortcode {
         }
         $url = $base . '?' . implode( '&', $params );
 
-    // Use transient caching keyed by URL (include group params)
-    $transient_key = 'creol_' . md5( $url );
-        $data = get_transient( $transient_key );
-        if ( false === $data ) {
-            $response = wp_remote_get( $url, array( 'timeout' => 10 ) );
-            if ( is_wp_error( $response ) ) {
-                error_log( 'CREOL People API Error: ' . $response->get_error_message() . ' | URL: ' . $url );
-                return '<div class="creol-people-error">Could not retrieve people data.</div>';
-            }
-            
-            $response_code = wp_remote_retrieve_response_code( $response );
-            if ( $response_code !== 200 ) {
-                error_log( 'CREOL People API HTTP Error: Response code ' . $response_code . ' | URL: ' . $url );
-                return '<div class="creol-people-error">Could not retrieve people data.</div>';
-            }
-            
-            $body = wp_remote_retrieve_body( $response );
-            $decoded = json_decode( $body, true );
-            if ( null === $decoded || ! isset( $decoded['response'] ) ) {
-                error_log( 'CREOL People API Parse Error: Invalid JSON response | URL: ' . $url . ' | Body: ' . substr( $body, 0, 200 ) );
-                return '<div class="creol-people-error">API returned unexpected data.</div>';
-            }
-            
-            if ( ! is_array( $decoded['response'] ) ) {
-                error_log( 'CREOL People API Data Error: Response is not an array | URL: ' . $url );
-                return '<div class="creol-people-error">API returned unexpected data format.</div>';
-            }
-            
-            $data = $decoded['response'];
-            set_transient( $transient_key, $data, $cache_ttl );
+        $client = new CREOL_People_API_Client();
+        $data = $client->fetch( $params, $cache_ttl );
+
+        if ( is_wp_error( $data ) ) {
+            error_log( 'CREOL People API Error: ' . $data->get_error_message() . ' | URL: ' . $url );
+            return '<div class="creol-people-error">Could not retrieve people data.</div>';
         }
 
         if ( empty( $data ) ) {

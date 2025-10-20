@@ -250,10 +250,11 @@ class CREOL_People_Admin {
 
         // Delete all CREOL transients
         global $wpdb;
+        $prefix = defined( 'CREOL_PEOPLE_API_TRANSIENT_PREFIX' ) ? CREOL_PEOPLE_API_TRANSIENT_PREFIX : 'creol_';
         $wpdb->query(
             "DELETE FROM {$wpdb->options} 
-            WHERE option_name LIKE '_transient_creol_%' 
-            OR option_name LIKE '_transient_timeout_creol_%'"
+            WHERE option_name LIKE '_transient_{$prefix}%' 
+            OR option_name LIKE '_transient_timeout_{$prefix}%'"
         );
 
         // Redirect back with success message
