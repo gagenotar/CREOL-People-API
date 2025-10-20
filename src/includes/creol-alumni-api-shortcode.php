@@ -153,12 +153,13 @@ class CREOL_Alumni_Shortcode {
 
     private function render_table( $data ) {
         $out = '<div class="creol-alumni-table-wrapper" role="region" aria-label="Alumni table">';
-        $out .= '<table class="creol-alumni-table" role="table" aria-label="Alumni: name, program, and semester.">';
+        $out .= '<table class="creol-alumni-table" role="table" aria-label="Alumni: name, program, semester, and advisor.">';
         $out .= '<thead class="creol-alumni-table-head">';
         $out .= '<tr class="creol-alumni-table-row" role="row">';
         $out .= '<th scope="col">Name</th>';
         $out .= '<th scope="col">Program</th>';
         $out .= '<th scope="col">Semester</th>';
+        $out .= '<th scope="col">Advisor</th>';
         $out .= '</tr>';
         $out .= '</thead>';
         $out .= '<tbody class="creol-alumni-table-body">';
@@ -173,11 +174,13 @@ class CREOL_Alumni_Shortcode {
             $name = isset( $person['FirstLastName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['FirstLastName'] ) ) : '';
             $program = isset( $person['Program'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Program'] ) ) : '';
             $semester = isset( $person['Semester'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Semester'] ) ) : '';
+            $advisor = isset( $person['AdvisorName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['AdvisorName'] ) ) : '';
 
             $out .= '<tr class="creol-alumni-table-row" role="row">';
             $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Name">' . esc_html( $name ) . '</td>';
             $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Program">' . esc_html( $program ) . '</td>';
             $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Semester">' . esc_html( $semester ) . '</td>';
+            $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Advisor">' . esc_html( $advisor ) . '</td>';
             $out .= '</tr>';
         }
 
