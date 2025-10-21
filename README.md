@@ -4,7 +4,7 @@ A WordPress plugin that displays people in a customizable grid layout using data
 
 ## Description
 
-The CREOL People API plugin provides a simple shortcode to display staff, faculty, or other personnel from the CREOL (College of Optics and Photonics) database. The plugin fetches data from the CREOL API and displays it in a responsive grid layout with customizable options.
+The CREOL People API plugin provides a simple shortcode to display staff, faculty, alumni, or other personnel from the CREOL (College of Optics and Photonics) database. The plugin fetches data from the CREOL API and displays it in a responsive grid layout with customizable options.
 
 ## Features
 
@@ -12,6 +12,7 @@ The CREOL People API plugin provides a simple shortcode to display staff, facult
 - **Responsive Design**: Automatically adapts to different screen sizes
 - **Smart Caching**: Reduces API calls with configurable transient caching
 - **Group Filtering**: Filter people by one or two group names
+- **Alumni Support**: Display alumni personnel in table and grid modes
 - **Highly Customizable**: Control columns, limits, color scheme, and display modes via shortcode attributes
 
 ## Installation
@@ -36,58 +37,87 @@ The CREOL People API plugin provides a simple shortcode to display staff, facult
 
 ## Usage
 
-### Basic Shortcode
+### People Shortcode
 
 Display all people from a specific group:
 
 ```
-[creol_people grpname1="Faculty"]
+[creol_people_api grpname1="Faculty"]
+```
+
+### Alumni Shortcode
+
+Display alumni records (grid display):
+
+```
+[creol_alumni_api]
+```
+
+Table example:
+
+```
+[creol_alumni_api display="table"]
 ```
 
 ### Advanced Examples
 
 **Display with two group filters:**
 ```
-[creol_people grpname1="Faculty" grpname2="Optics"]
+[creol_people_api grpname1="Faculty" grpname2="Optics"]
 ```
 
 **Limit the number of results:**
 ```
-[creol_people grpname1="Staff" limit="6"]
+[creol_people_api grpname1="Staff" limit="6"]
+[creol_alumni_api year="2023" limit="10"]
 ```
 
 **Use compact grid mode (no images):**
 ```
-[creol_people grpname1="Faculty" display="grid"]
+[creol_people_api grpname1="Faculty" display="grid"]
 ```
 
 **Custom column layout:**
 ```
-[creol_people grpname1="Faculty" columns="4"]
+[creol_people_api grpname1="Faculty" columns="4"]
+[creol_alumni_api year="2020" columns="5"]
 ```
 
 **Combine multiple options:**
 ```
-[creol_people grpname1="Faculty" grpname2="Research" display="card" columns="3" limit="12"]
+[creol_people_api grpname1="Faculty" grpname2="Research" display="card" columns="3" limit="12"]
 ```
 
 **Custom cache duration (in seconds):**
 ```
-[creol_people grpname1="Staff" cache_ttl="600"]
+[creol_people_api grpname1="Staff" cache_ttl="600"]
+[creol_alumni_api year="2019" cache_ttl="1200"]
 ```
 
 ## Shortcode Attributes
 
+People shortcode attributes:
 | Attribute | Description | Default | Values |
 |-----------|-------------|---------|--------|
 | `grpname1` | Primary group name to filter by | _(empty)_ | Any group name |
 | `grpname2` | Secondary group name to filter by | _(empty)_ | Any group name |
 | `limit` | Maximum number of people to display | `0` (all) | Any positive integer |
 | `display` | Display mode | `card` | `card`, `grid` |
-| `columns` | Number of grid columns | `3` | `1` to `6` |
+| `columns` | Number of grid columns | `3` | `1` to `8` |
 | `cache_ttl` | Cache duration in seconds | `300` (5 min) | Any positive integer |
 | `include_positions` | Include specific positions | _(empty)_ | Any position name |
 | `exclude_positions` | Exclude specific positions | _(empty)_ | Any position name |
+| `dark_mode` | Set theme to dark | `0` | `0` (off) or `1` (on) |
+
+Alumni shortcode attributes:
+| Attribute | Description | Default | Values |
+|-----------|-------------|---------|--------|
+| `year` | Graduation year to filter by | _(empty)_ | Any year in the (YYYY) format |
+| `degree` | Degree type to filter by | _(empty)_ | `all` (default), `ms`, `phd` |
+| `limit` | Maximum number of people to display | `0` (all) | Any positive integer |
+| `display` | Display mode | `grid` | `table`, `grid` |
+| `columns` | Number of grid columns | `3` | `1` to `8` |
+| `cache_ttl` | Cache duration in seconds | `300` (5 min) | Any positive integer |
 | `dark_mode` | Set theme to dark | `0` | `0` (off) or `1` (on) |
 
 ### Attribute Aliases
@@ -98,7 +128,7 @@ For convenience, the following aliases are supported (case-insensitive):
 
 ## Display Modes
 
-### Card Mode (default)
+### Card Mode (people)
 Shows a full card for each person including:
 - Profile image
 - Name
@@ -107,13 +137,28 @@ Shows a full card for each person including:
 - Phone number
 - Room number
 
-### Grid Mode
+### Grid Mode (people)
 Displays a compact grid without images, showing only:
 - Name
 - Position/Title
 - Email address
 - Phone number
 - Room number
+
+### Grid Mode (alumni)
+Display a compact grid without images, showing only:
+- Name
+- Program
+- Semester
+- Degree type
+- Advisor
+
+### Table Mode (alumni)
+Displays a responsive table containing:
+- Name
+- Program
+- Semester
+- Advisor
 
 ## Styling
 
@@ -129,6 +174,9 @@ The plugin includes default styles that can be overridden in your theme. Key CSS
 - `.creol-person-email` - Email address
 - `.creol-person-phone` - Phone number
 - `.creol-person-room` - Room number
+- `.creol-alumni-grid` - Alumni grid container
+- `.creol-alumni-table` - Alumni table
+- `.creol-alumni-card` - Alumni card
 
 ### Custom CSS Example
 
@@ -173,6 +221,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 This plugin is licensed under GPL3. See the main plugin file for full license information.
 
 ## Changelog
+
+### 1.2.0
+- Alumni shortcode support
+- Grid and table display modes for alumni
+- Minor UI/UX improvements
 
 ### 1.1.0
 - Dark mode attribute
