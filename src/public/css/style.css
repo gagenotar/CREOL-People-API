@@ -1,12 +1,12 @@
 /* Base styles */
-.creol-people-grid{display:grid;grid-template-columns:repeat(var(--creol-columns,3),1fr);gap:40px;margin:0;padding:0}
+.creol-people-grid{display:grid;grid-template-columns:repeat(var(--creol-columns,3),1fr);row-gap:40px;column-gap:60px;margin:0;padding:0}
 .creol-person-card{background:#fff;border:1px solid #e6e6e6;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.2s ease}
 .creol-person-card img{max-width:100%;height:auto}
 .creol-person-image{width:100%;height:auto;overflow:hidden}
 .creol-person-image img{width:100%;height:auto;display:block;object-fit:cover;aspect-ratio: 2 / 3;overflow: hidden}
 .creol-person-body{width:100%;padding:0.5rem}
 .creol-person-name{font-size:1rem;margin:0 0 0.25rem;font-weight:600}
-.creol-person-position{font-size:0.875rem;color:#666;margin-bottom:0.25rem}
+.creol-person-position{font-size:0.875rem;color:#666;margin-bottom:0.25rem;font-style: italic}
 .creol-person-email{font-size:0.875rem;margin-bottom:0.25rem}
 .creol-person-email a{color:#0073aa;text-decoration:none}
 .creol-person-email a:hover{text-decoration:underline}

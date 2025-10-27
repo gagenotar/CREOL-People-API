@@ -175,14 +175,14 @@ class CREOL_People_Shortcode {
         if ( $position ) {
             $out .= '<div class="creol-person-position text-center" itemprop="jobTitle">' . $position . '</div>';
         }
-        if ( $email ) {
-            $out .= '<div class="creol-person-email text-center"><a href="mailto:' . esc_attr( $email ) . '" itemprop="email" aria-label="Email ' . esc_attr( $name ) . '">Email</a></div>';
+        if ( $room ) {
+            $out .= '<div class="creol-person-room text-center"><span class="screen-reader-text">Room: </span>' . esc_html( $room ) . '</div>';
         }
         if ( $phone ) {
             $out .= '<div class="creol-person-phone text-center" itemprop="telephone"><span class="screen-reader-text">Phone: </span>' . esc_html( $phone ) . '</div>';
         }
-        if ( $room ) {
-            $out .= '<div class="creol-person-room text-center"><span class="screen-reader-text">Room: </span>' . esc_html( $room ) . '</div>';
+        if ( $email ) {
+            $out .= '<div class="creol-person-email text-center"><a href="mailto:' . esc_attr( $email ) . '" itemprop="email" aria-label="Email ' . esc_attr( $name ) . '">Email</a></div>';
         }
         $out .= '</div>'; // body
         $out .= '</article>'; // card
