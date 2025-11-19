@@ -1,17 +1,17 @@
 /* Base styles */
-.creol-people-grid{display:grid;grid-template-columns:repeat(var(--creol-columns,3),1fr);row-gap:40px;column-gap:60px;margin:0;padding:0}
+.creol-people-grid{display:grid;grid-template-columns:repeat(var(--creol-columns,3),1fr);row-gap:2em;column-gap:2em;margin:0;padding:0}
 .creol-person-card{background:#fff;border:1px solid #e6e6e6;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.2s ease}
 .creol-person-card img{max-width:100%;height:auto}
 .creol-person-image{width:100%;height:auto;overflow:hidden}
 .creol-person-image img{width:100%;height:auto;display:block;object-fit:cover;aspect-ratio: 2 / 3;overflow: hidden}
-.creol-person-body{width:100%;padding:0.5rem}
-.creol-person-name{font-size:1rem;margin:0 0 0.25rem;font-weight:600}
-.creol-person-position{font-size:0.875rem;color:#666;margin-bottom:0.25rem;font-style: italic}
-.creol-person-email{font-size:0.875rem;margin-bottom:0.25rem}
+.creol-person-body{width:100%;padding:0.5em}
+.creol-person-name{font-size:0.9em;margin:0 0 0.25em;font-weight:600}
+.creol-person-position{font-size:0.875em;color:#666;margin-bottom:0.25em;font-style: italic}
+.creol-person-email{font-size:0.875em;margin-bottom:0.25em}
 .creol-person-email a{color:#0073aa;text-decoration:none}
 .creol-person-email a:hover{text-decoration:underline}
-.creol-person-phone,.creol-person-room{font-size:0.875rem;color:#444;margin-bottom:0.25rem}
-.creol-people-error,.creol-people-empty{color:#900;padding:0.5rem;background:#fee;border:1px solid #fcc;border-radius:4px}
+.creol-person-phone,.creol-person-room{font-size:0.875em;color:#444;margin-bottom:0.25em}
+.creol-people-error,.creol-people-empty{color:#900;padding:0.5em;background:#fee;border:1px solid #fcc;border-radius:4px}
 
 /* Accessibility: Screen reader only text */
 .screen-reader-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
@@ -29,39 +29,181 @@
 .creol-people-dark .creol-people-error,.creol-people-dark .creol-people-empty{background:#330000;border:1px solid #660000;color:#ffcccc}
 
 /* Grid display mode: more compact rows without images */
-.creol-people-grid-mode .creol-person-card{flex-direction:row;align-items:center;padding:0.5rem}
+.creol-people-grid-mode .creol-person-card{flex-direction:row;align-items:center;padding:0.5em}
 .creol-people-grid-mode .creol-person-image{display:none}
-.creol-people-grid-mode .creol-person-body{padding:0 0.5rem}
+.creol-people-grid-mode .creol-person-body{padding:0 0.5em}
 
 /* Responsive breakpoints */
 /* Tablets and smaller desktops */
-@media (max-width: 1024px) {
-    .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:40px}
+@media (max-width: 1440px) {
+    .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:1.5em}
     .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(4,1fr)}
 }
 
 /* Smaller tablets and larger mobile phones */
 @media (max-width: 767px) {
-    .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:40px}
+    .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:1em}
     .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
-    .creol-person-body{padding:0.75rem}
-    .creol-person-name{font-size:0.95rem}
+    .creol-person-body{padding:0.5em}
+    .creol-person-name{font-size:0.8em}
 }
 
 /* Mobile phones */
 @media (max-width: 480px) {
-    .creol-people-grid{grid-template-columns:1fr;gap:40px}
+    .creol-people-grid{grid-template-columns:1fr;gap:1em}
     .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
-    .creol-person-body{padding:1rem}
-    .creol-person-name{font-size:1.1rem}
-    .creol-person-position,.creol-person-email,.creol-person-phone,.creol-person-room{font-size:0.9rem}
+    .creol-person-body{padding:0.5em}
+    .creol-person-name{font-size:0.9em}
+    .creol-person-position,.creol-person-email,.creol-person-phone,.creol-person-room{font-size:0.8em}
     
     /* Grid mode adjustments for mobile */
-    .creol-people-grid-mode .creol-person-card{flex-direction:column;align-items:flex-start}
-    .creol-people-grid-mode .creol-person-body{padding:1rem;width:100%}
+    .creol-people-grid-mode .creol-person-card{flex-direction:column;align-items:flex-center}
+    .creol-people-grid-mode .creol-person-body{padding:0.5em;width:100%}
 }
 
-/* === CREOL Alumni styles — harmonized with People styles === */
+/* === CREOL Alumni styles â€” harmonized with People styles === */
+
+/* Grid / container parity with people styles */
+.creol-alumni-grid{display:grid;grid-template-columns:repeat(var(--columns,3),1fr);gap:40px;margin:0;padding:0}
+.creol-alumni-card{background:#fff;border:1px solid #e6e6e6;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.2s ease}
+.creol-alumni-body{width:100%;padding:0.5rem}
+.creol-alumni-name{font-size:1rem;margin:0 0 0.25rem;font-weight:600}
+.creol-alumni-program{font-size:0.875rem;color:#666;margin-bottom:0.25rem}
+.creol-alumni-semester,.creol-alumni-degree,.creol-alumni-advisor{font-size:0.875rem;color:#444;margin-bottom:0.25rem}
+.creol-alumni-error,.creol-alumni-empty{color:#900;padding:0.5rem;background:#fee;border:1px solid #fcc;border-radius:4px}
+
+/* Reuse people utility for screen-reader text and loading */
+.creol-alumni .screen-reader-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+.creol-alumni-loading{position:relative;opacity:0.6;pointer-events:none}
+.creol-alumni-loading .creol-loading-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #0073aa;border-radius:50%;animation:creol-spin 1s linear infinite;z-index:10}
+
+/* Dark mode parity with people styles */
+.creol-alumni-dark .creol-alumni-card{background:#2c2c2c;border:1px solid #444;color:#ddd}
+.creol-alumni-dark .creol-alumni-name{color:#fff}
+.creol-alumni-dark .creol-alumni-program,.creol-alumni-dark .creol-alumni-semester,.creol-alumni-dark .creol-alumni-degree,.creol-alumni-dark .creol-alumni-advisor{color:#bbb}
+.creol-alumni-dark .creol-alumni-error,.creol-alumni-dark .creol-alumni-empty{background:#330000;border:1px solid #660000;color:#ffcccc}
+
+/* Grid display mode: more compact rows (mirror people grid mode) */
+.creol-alumni-grid-mode .creol-alumni-card{flex-direction:row;align-items:center;padding:0.5rem}
+.creol-alumni-grid-mode .creol-alumni-image{display:none}
+.creol-alumni-grid-mode .creol-alumni-body{padding:0 0.5rem}
+
+/* Simple image container (if alumni have photos later) */
+.creol-alumni-image{width:100%;height:auto;overflow:hidden}
+.creol-alumni-image img{width:100%;height:auto;display:block;object-fit:cover;aspect-ratio:2/3;overflow:hidden}
+
+/* === Table mode styles specific to alumni shortcode === */
+.creol-alumni-table-wrapper{overflow:auto;border-radius:6px}
+.creol-alumni-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e6e6e6}
+.creol-alumni-table thead{background:#f7f7f7}
+.creol-alumni-table th,.creol-alumni-table td{padding:0.5rem 0.75rem;text-align:left;border-bottom:1px solid #eee;vertical-align:middle}
+.creol-alumni-table th{font-weight:700;font-size:0.95rem;color:#222}
+.creol-alumni-table tr:hover{background:#fbfbfb}
+
+/* Table dark mode */
+.creol-alumni-dark .creol-alumni-table{background:#2c2c2c;border-color:#444}
+.creol-alumni-dark .creol-alumni-table thead{background:#333}
+.creol-alumni-dark .creol-alumni-table th,.creol-alumni-dark .creol-alumni-table td{color:#ddd;border-color:#3a3a3a}
+
+/* Accessible small-screen stacking for table rows */
+@media (max-width: 600px) {
+    .creol-alumni-table thead{display:none}
+    .creol-alumni-table tr{display:block;margin-bottom:0.75rem;border-bottom:1px solid #eee;padding-bottom:0.5rem}
+    .creol-alumni-table td{display:block;text-align:right;padding-left:50%;position:relative}
+    .creol-alumni-table td::before{content:attr(data-label);position:absolute;left:0;top:0;padding-left:0.75rem;font-weight:600;text-align:left;color:#333;width:50%}
+    .creol-alumni-dark .creol-alumni-table td::before{color:#ddd}
+}
+
+/* Responsive parity with people stylesheet using --columns variable */
+@media (max-width: 1024px) {
+    .creol-alumni-grid{grid-template-columns:repeat(1,1fr);gap:40px}
+    .creol-alumni-grid[style*="--columns:8"],.creol-alumni-grid[style*="--columns:7"],.creol-alumni-grid[style*="--columns:6"],.creol-alumni-grid[style*="--columns:5"],.creol-alumni-grid[style*="--columns:4"],.creol-alumni-grid[style*="--columns:3"],.creol-alumni-grid[style*="--columns:2"]{grid-template-columns:repeat(4,1fr)}
+}
+
+@media (max-width: 767px) {
+    .creol-alumni-grid{grid-template-columns:repeat(1,1fr);gap:40px}
+    .creol-alumni-grid[style*="--columns:8"],.creol-alumni-grid[style*="--columns:7"],.creol-alumni-grid[style*="--columns:6"],.creol-alumni-grid[style*="--columns:5"],.creol-alumni-grid[style*="--columns:4"],.creol-alumni-grid[style*="--columns:3"],.creol-alumni-grid[style*="--columns:2"]{grid-template-columns:repeat(2,1fr)}
+    .creol-alumni-body{padding:0.75rem}
+    .creol-alumni-name{font-size:0.95rem}
+}
+
+@media (max-width: 480px) {
+    .creol-alumni-grid{grid-template-columns:1fr;gap:40px}
+    .creol-alumni-grid[style*="--columns:8"],.creol-alumni-grid[style*="--columns:7"],.creol-alumni-grid[style*="--columns:6"],.creol-alumni-grid[style*="--columns:5"],.creol-alumni-grid[style*="--columns:4"],.creol-alumni-grid[style*="--columns:3"],.creol-alumni-grid[style*="--columns:2"]{grid-template-columns:repeat(2,1fr)}
+    .creol-alumni-body{padding:1rem}
+    .creol-alumni-name{font-size:1.1rem}
+    .creol-alumni-program,.creol-alumni-semester,.creol-alumni-degree,.creol-alumni-advisor{font-size:0.9rem}
+
+    /* Grid mode adjustments for mobile */
+    .creol-alumni-grid-mode .creol-alumni-card{flex-direction:column;align-items:flex-center}
+    .creol-alumni-grid-mode .creol-alumni-body{padding:1rem;width:100%}
+}
+/* Base styles */
+.creol-people-grid{display:grid;grid-template-columns:repeat(var(--creol-columns,3),1fr);row-gap:2em;column-gap:2em;margin:0;padding:0}
+.creol-person-card{background:#fff;border:1px solid #e6e6e6;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.2s ease}
+.creol-person-card img{max-width:100%;height:auto}
+.creol-person-image{width:100%;height:auto;overflow:hidden}
+.creol-person-image img{width:100%;height:auto;display:block;object-fit:cover;aspect-ratio: 2 / 3;overflow: hidden}
+.creol-person-body{width:100%;padding:0.5em}
+.creol-person-name{font-size:0.9em;margin:0 0 0.25em;font-weight:600}
+.creol-person-position{font-size:0.875em;color:#666;margin-bottom:0.25em;font-style: italic}
+.creol-person-email{font-size:0.875em;margin-bottom:0.25em}
+.creol-person-email a{color:#0073aa;text-decoration:none}
+.creol-person-email a:hover{text-decoration:underline}
+.creol-person-phone,.creol-person-room{font-size:0.875em;color:#444;margin-bottom:0.25em}
+.creol-people-error,.creol-people-empty{color:#900;padding:0.5em;background:#fee;border:1px solid #fcc;border-radius:4px}
+
+/* Accessibility: Screen reader only text */
+.screen-reader-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+
+/* Loading states and animations */
+.creol-people-loading{position:relative;opacity:0.6;pointer-events:none}
+.creol-loading-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #0073aa;border-radius:50%;animation:creol-spin 1s linear infinite;z-index:10}
+@keyframes creol-spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* Dark mode styles */
+.creol-people-dark .creol-person-card{background:#2c2c2c;border:1px solid #444;color:#ddd}
+.creol-people-dark .creol-person-name{color:#fff}
+.creol-people-dark .creol-person-position,.creol-people-dark .creol-person-phone,.creol-people-dark .creol-person-room{color:#bbb}
+.creol-people-dark .creol-person-email a{color:#66aaff}
+.creol-people-dark .creol-people-error,.creol-people-dark .creol-people-empty{background:#330000;border:1px solid #660000;color:#ffcccc}
+
+/* Grid display mode: more compact rows without images */
+.creol-people-grid-mode .creol-person-card{flex-direction:row;align-items:center;padding:0.5em}
+.creol-people-grid-mode .creol-person-image{display:none}
+.creol-people-grid-mode .creol-person-body{padding:0 0.5em}
+
+/* Responsive breakpoints */
+/* Tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:1em}
+    .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(4,1fr)}
+    .creol-person-name{font-size:0.75em}
+    .creol-person-position,.creol-person-email,.creol-person-phone,.creol-person-room{font-size:0.75em}
+}
+
+/* Smaller tablets and larger mobile phones */
+@media (max-width: 768px) {
+    .creol-people-grid{grid-template-columns:repeat(1,1fr);gap:1em}
+    .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(3,1fr)}
+    .creol-person-body{padding:0.5em}
+    .creol-person-name{font-size:1em}
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .creol-people-grid{grid-template-columns:1fr;gap:1em}
+    .creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:8"],.creol-people-grid[style*="--creol-columns:7"],.creol-people-grid[style*="--creol-columns:6"],.creol-people-grid[style*="--creol-columns:5"],.creol-people-grid[style*="--creol-columns:4"],.creol-people-grid[style*="--creol-columns:3"],.creol-people-grid[style*="--creol-columns:2"]{grid-template-columns:repeat(2,1fr)}
+    .creol-person-body{padding:0.5em}
+    .creol-person-name{font-size:0.9em}
+    .creol-person-position,.creol-person-email,.creol-person-phone,.creol-person-room{font-size:0.8em}
+    
+    /* Grid mode adjustments for mobile */
+    .creol-people-grid-mode .creol-person-card{flex-direction:column;align-items:flex-center}
+    .creol-people-grid-mode .creol-person-body{padding:0.5em;width:100%}
+}
+
+/* === CREOL Alumni styles â€” harmonized with People styles === */
 
 /* Grid / container parity with people styles */
 .creol-alumni-grid{display:grid;grid-template-columns:repeat(var(--columns,3),1fr);gap:40px;margin:0;padding:0}
