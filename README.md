@@ -4,7 +4,7 @@ A WordPress plugin that displays people in a customizable grid layout using data
 
 ## Description
 
-The CREOL People API plugin provides a simple shortcode to display staff, faculty, alumni, or other personnel from the CREOL (College of Optics and Photonics) database. The plugin fetches data from the CREOL API and displays it in a responsive grid layout with customizable options.
+The CREOL People API plugin provides a simple shortcode to display staff, faculty, alumni, or other personnel from the CREOL (College of Optics and Photonics) database. The plugin fetches data from the CREOL API and displays it in a responsive layout with customizable options.
 
 ## Features
 
