@@ -155,8 +155,8 @@ class CREOL_People_Shortcode {
             error_log( 'CREOL People API: Invalid person data structure - ' . print_r( $person, true ) );
             return '';
         }
+
         
-        $image = isset( $person['ImageURL'] ) ? esc_url( $person['ImageURL'] ) : '';
         $first = isset( $person['FirstName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['FirstName'] ) ) : '';
         $last = isset( $person['LastName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['LastName'] ) ) : '';
         $name = trim( $first . ' ' . $last );
@@ -164,11 +164,14 @@ class CREOL_People_Shortcode {
         $email = isset( $person['Email'] ) ? sanitize_email( $person['Email'] ) : '';
         $phone = isset( $person['Phone'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Phone'] ) ) : '';
         $room = isset( $person['Room'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Room'] ) ) : '';
+        $people_id = isset( $person['PeopleID'] ) ? intval( $person['PeopleID'] ) : 0;
 
         $out = '<article class="creol-person-card align-items-start" role="listitem" itemscope itemtype="https://schema.org/Person">';
         // In 'grid' display mode we exclude the image to show a compact grid of info
-        if ( 'card' === $display && $image ) {
-            $out .= '<div class="creol-person-image"><img src="' . $image . '" alt="' . esc_attr( $name ) . '" itemprop="image"></div>';
+        if ( 'card' === $display && $people_id > 0 ) {
+            $out .= '<div class="creol-person-image">';
+            $out .= '<img src="' . esc_url( rest_url( "creol-people/v1/person-headshot/{$people_id}" ) ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" />';
+            $out .= '</div>';
         }
         $out .= '<div class="creol-person-body align-items-start">';
         $out .= '<h3 class="creol-person-name text-center" itemprop="name">' . esc_html( $name ) . '</h3>';

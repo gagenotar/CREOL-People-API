@@ -32,3 +32,8 @@ typings
 
 # debug files
 npm-debug.log
+
+# IDE files
+.vscode/
+.idea/
+.github/instructions/

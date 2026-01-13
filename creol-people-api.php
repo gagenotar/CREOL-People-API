@@ -25,6 +25,9 @@ require_once plugin_dir_path( __FILE__ ) . 'src/includes/creol-people-api-client
 require_once plugin_dir_path( __FILE__ ) . 'src/includes/creol-people-api-shortcode.php';
 require_once plugin_dir_path( __FILE__ ) . 'src/includes/creol-alumni-api-shortcode.php';
 
+// Load REST helper routes
+require_once plugin_dir_path( __FILE__ ) . 'src/includes/creol-people-api-rest.php';
+
 // Load the admin class
 if ( is_admin() ) {
     require_once plugin_dir_path( __FILE__ ) . 'src/includes/creol-people-api-admin.php';
