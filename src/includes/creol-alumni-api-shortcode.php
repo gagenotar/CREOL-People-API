@@ -140,10 +140,9 @@ class CREOL_Alumni_Shortcode {
             return false;
         }
         
-        // At minimum, we need a FirstLastName, a Program, a Semester, and a Degree
+        // At minimum, we need a FirstLastName, a Semester, and a Degree
         $has_valid_fields = ( 
             ( isset( $person['FirstLastName'] ) && ! empty( $person['FirstLastName'] ) ) &&
-            ( isset( $person['Program'] ) && ! empty( $person['Program'] ) ) &&
             ( isset( $person['Semester'] ) && ! empty( $person['Semester'] ) ) &&
             ( isset( $person['Degree'] ) && ! empty( $person['Degree'] ) )
         );
@@ -153,11 +152,11 @@ class CREOL_Alumni_Shortcode {
 
     private function render_table( $data ) {
         $out = '<div class="creol-alumni-table-wrapper" role="region" aria-label="Alumni table">';
-        $out .= '<table class="creol-alumni-table" role="table" aria-label="Alumni: name, program, semester, and advisor.">';
+        $out .= '<table class="creol-alumni-table" role="table" aria-label="Alumni: name, degree, semester, and advisor.">';
         $out .= '<thead class="creol-alumni-table-head">';
         $out .= '<tr class="creol-alumni-table-row" role="row">';
         $out .= '<th scope="col">Name</th>';
-        $out .= '<th scope="col">Program</th>';
+        $out .= '<th scope="col">Degree</th>';
         $out .= '<th scope="col">Semester</th>';
         $out .= '<th scope="col">Advisor</th>';
         $out .= '</tr>';
@@ -172,13 +171,13 @@ class CREOL_Alumni_Shortcode {
             }
 
             $name = isset( $person['FirstLastName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['FirstLastName'] ) ) : '';
-            $program = isset( $person['Program'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Program'] ) ) : '';
+            $degree = isset( $person['Degree'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Degree'] ) ) : '';
             $semester = isset( $person['Semester'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Semester'] ) ) : '';
             $advisor = isset( $person['AdvisorName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['AdvisorName'] ) ) : '';
 
             $out .= '<tr class="creol-alumni-table-row" role="row">';
             $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Name">' . esc_html( $name ) . '</td>';
-            $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Program">' . esc_html( $program ) . '</td>';
+            $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Degree">' . esc_html( $degree ) . '</td>';
             $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Semester">' . esc_html( $semester ) . '</td>';
             $out .= '<td class="creol-alumni-table-cell" role="cell" data-label="Advisor">' . esc_html( $advisor ) . '</td>';
             $out .= '</tr>';
@@ -197,7 +196,6 @@ class CREOL_Alumni_Shortcode {
         }
         
         $name = isset( $person['FirstLastName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['FirstLastName'] ) ) : '';
-        $program = isset( $person['Program'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Program'] ) ) : '';
         $semester = isset( $person['Semester'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Semester'] ) ) : '';
         $degree = isset( $person['Degree'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Degree'] ) ) : '';
         $advisor = isset( $person['AdvisorName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['AdvisorName'] ) ) : '';
@@ -205,9 +203,6 @@ class CREOL_Alumni_Shortcode {
         $out = '<article class="creol-alumni-card align-items-start" role="listitem" itemscope itemtype="https://schema.org/Person">';
         $out .= '<div class="creol-alumni-body align-items-start">';
         $out .= '<h3 class="creol-alumni-name text-center" itemprop="name">' . esc_html( $name ) . '</h3>';
-        if ( $program ) {
-            $out .= '<div class="creol-alumni-program text-center" itemprop="alumniOf">' . $program . '</div>';
-        }
         if ( $semester ) {
             $out .= '<div class="creol-alumni-semester text-center">' . $semester . '</div>';
         }
