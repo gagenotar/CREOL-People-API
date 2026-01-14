@@ -206,29 +206,6 @@ class CREOL_People_Admin {
                 <?php wp_nonce_field( 'creol_clear_cache', 'creol_cache_nonce' ); ?>
                 <?php submit_button( 'Clear All Cache', 'secondary', 'submit', false ); ?>
             </form>
-
-            <hr>
-
-            <h2>Shortcode Usage</h2>
-            <p>Use the following shortcode to display people on your pages:</p>
-            <code>[creol_people grpname1="Faculty"]</code>
-            
-            <h3>Available Attributes:</h3>
-            <ul style="list-style: disc; margin-left: 20px;">
-                <li><strong>grpname1</strong>: Primary group filter</li>
-                <li><strong>grpname2</strong>: Secondary group filter</li>
-                <li><strong>limit</strong>: Maximum number of people to display</li>
-                <li><strong>display</strong>: Display mode (card or grid)</li>
-                <li><strong>columns</strong>: Number of grid columns (1-8)</li>
-                <li><strong>cache_ttl</strong>: Cache duration in seconds</li>
-            </ul>
-
-            <h3>Examples:</h3>
-            <ul style="list-style: none; margin-left: 20px;">
-                <li><code>[creol_people grpname1="Faculty" columns="4"]</code></li>
-                <li><code>[creol_people grpname1="Staff" display="grid" limit="10"]</code></li>
-                <li><code>[creol_people grpname1="Faculty" grpname2="Research"]</code></li>
-            </ul>
         </div>
         <?php
     }
