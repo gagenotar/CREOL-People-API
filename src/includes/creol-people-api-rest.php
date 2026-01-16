@@ -67,7 +67,7 @@ function creol_proxy_headshot( WP_REST_Request $request ) {
             continue;
         }
 
-        // Cache only real person-specific paths
+        // Set a cache for this working path
         set_transient( $path_cache_key, $path, HOUR_IN_SECONDS * 6 );
 
         header( 'Content-Type: image/jpeg' );

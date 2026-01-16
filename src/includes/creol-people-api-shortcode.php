@@ -38,7 +38,7 @@ class CREOL_People_Shortcode {
         // Get saved options for defaults
         $saved_options = get_option( 'creol_people_api_options', array() );
         
-        // normalize attributes (support different casing/keys)
+        // normalize attribute casing
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $defaults = array(
             'grpname1' => '',
@@ -59,12 +59,14 @@ class CREOL_People_Shortcode {
         $excluded_positions = sanitize_text_field( $atts['excluded_positions'] );
         $display = sanitize_text_field( $atts['display'] );
         $columns = intval( $atts['columns'] );
-        // Clamp columns to 1..8
+
+        // Clamp columns to 1 - 8
         if ( $columns < 1 ) {
             $columns = 1;
         } elseif ( $columns > 8 ) {
             $columns = 8;
         }
+
         $limit = intval( $atts['limit'] );
         $cache_ttl = intval( $atts['cache_ttl'] );
         $dark = intval( $atts['dark_mode'] );
@@ -85,6 +87,7 @@ class CREOL_People_Shortcode {
         }
         $url = $base . '?' . implode( '&', $params );
 
+        // Instantiate client and fetch data
         $client = new CREOL_People_API_Client();
         $data = $client->fetch( $params, $cache_ttl );
 
@@ -119,6 +122,7 @@ class CREOL_People_Shortcode {
         if ( $dark ) {
             $container_class .= ' creol-people-dark';
         }
+
         // set CSS variable for columns so CSS can adapt across modes
         $out = '<div class="' . esc_attr( $container_class ) . '" style="--creol-columns:' . esc_attr( $columns ) . '" role="list" aria-label="People directory">';
         foreach ( $data as $person ) {
@@ -170,6 +174,7 @@ class CREOL_People_Shortcode {
         // In 'grid' display mode we exclude the image to show a compact grid of info
         if ( 'card' === $display && $people_id > 0 ) {
             $out .= '<div class="creol-person-image">';
+            // Use WP REST API endpoint to serve headshot images
             $out .= '<img src="' . esc_url( rest_url( "creol-people/v1/person-headshot/{$people_id}" ) ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" />';
             $out .= '</div>';
         }

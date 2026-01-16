@@ -25,6 +25,7 @@ class CREOL_People_API_Client {
         $cache_key = $this->transient_prefix . md5( $url );
         $data = get_transient( $cache_key );
 
+        // No cached data, fetch from API
         if ( false === $data ) {
             $response = wp_remote_get( $url, array( 'timeout' => 10 ) );
             if ( is_wp_error( $response ) ) {

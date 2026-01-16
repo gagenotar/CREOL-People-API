@@ -41,7 +41,7 @@ class CREOL_Alumni_Shortcode {
         // Get saved options for defaults
         $saved_options = get_option( 'creol_alumni_api_options', array() );
         
-        // normalize attributes (support different casing/keys)
+        // Normalize attribute casing
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $defaults = array(
             'year' => '',
@@ -58,7 +58,7 @@ class CREOL_Alumni_Shortcode {
         $degree = sanitize_text_field( $atts['degree'] );
         $display = sanitize_text_field( $atts['display'] );
         $columns = intval( $atts['columns'] );
-        // Clamp columns to 1..8
+        // Clamp columns to 1 - 8
         if ( $columns < 1 ) {
             $columns = 1;
         } elseif ( $columns > 8 ) {
@@ -78,12 +78,13 @@ class CREOL_Alumni_Shortcode {
         }
         $url = $base . '?' . implode( '&', $params );
 
+        // Instantiate API client and fetch data
         $client = new CREOL_People_API_Client();
         $data = $client->fetch( $params, $cache_ttl );
 
         if ( is_wp_error( $data ) ) {
-            error_log( 'CREOL People API Error: ' . $data->get_error_message() . ' | URL: ' . $url );
-            return '<div class="creol-people-error">Could not retrieve people data.</div>';
+            error_log( 'CREOL Alumni API Error: ' . $data->get_error_message() . ' | URL: ' . $url );
+            return '<div class="creol-alumni-error">Could not retrieve alumni data.</div>';
         }
 
         if ( empty( $data ) ) {
@@ -119,7 +120,7 @@ class CREOL_Alumni_Shortcode {
             return $this->render_table( $data );
         }
 
-        // set CSS variable for columns so CSS can adapt across modes
+        // Set CSS variable for columns so CSS can adapt across modes
         $out = '<div class="' . esc_attr( $container_class ) . '" style="--columns: ' . esc_attr( $columns ) . ';" role="list" aria-label="Alumni directory">';
         foreach ( $data as $person ) {
             $out .= $this->render_card( $person, $display );

@@ -18,7 +18,7 @@ class CREOL_People_Admin {
     public function add_admin_menu() {
         add_options_page(
             'CREOL People API Settings',
-            'CREOL People API',
+            'CREOL People API', // Name that appears in the menu
             'manage_options',
             'creol-people-api',
             array( $this, 'render_settings_page' )
