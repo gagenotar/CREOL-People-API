@@ -31,6 +31,7 @@ class CREOL_Alumni_Shortcode {
      * Attributes (case-insensitive accepted):
      * - year: graduation year
      * - degree: (all, ms, phd)
+     * - advisor_ucf_id: people ID of advisor
      * - limit: max number of results to show
      * - display: (table, grid)
      * - columns: number of columns for grid display (1-8)
@@ -46,6 +47,7 @@ class CREOL_Alumni_Shortcode {
         $defaults = array(
             'year' => '',
             'degree' => 'all',
+            'advisor_ucf_id' => '',
             'limit' => 0,
             'cache_ttl' => isset( $saved_options['default_cache_ttl'] ) ? $saved_options['default_cache_ttl'] : $this->cache_ttl,
             'display' => isset( $saved_options['default_display'] ) ? $saved_options['default_display'] : 'grid',
@@ -56,6 +58,7 @@ class CREOL_Alumni_Shortcode {
 
         $year = sanitize_text_field( $atts['year'] );
         $degree = sanitize_text_field( $atts['degree'] );
+        $advisor_ucf_id = sanitize_text_field( $atts['advisor_ucf_id'] );
         $display = sanitize_text_field( $atts['display'] );
         $columns = intval( $atts['columns'] );
         // Clamp columns to 1 - 8
@@ -76,6 +79,9 @@ class CREOL_Alumni_Shortcode {
         if ( $degree !== '' ) {
             $params[] = 'Degree=' . rawurlencode( $degree );
         }
+        if ( $advisor_ucf_id !== '' ) {
+            $params[] = 'AdvisorUCFID=' . rawurlencode( $advisor_ucf_id );
+        }
         $url = $base . '?' . implode( '&', $params );
 
         // Instantiate API client and fetch data
@@ -88,7 +94,7 @@ class CREOL_Alumni_Shortcode {
         }
 
         if ( empty( $data ) ) {
-            return '<div class="creol-alumni-empty">No alumni found.</div>';
+            return '<p>There are currently no graduates listed for this degree.</p>';
         }
 
         // Filter out invalid person data
@@ -96,7 +102,7 @@ class CREOL_Alumni_Shortcode {
         
         if ( empty( $data ) ) {
             error_log( 'CREOL Alumni API: All alumni records failed validation | URL: ' . $url );
-            return '<div class="creol-alumni-empty">No valid alumni data found.</div>';
+            return '<p>There are currently no people listed for this position.</p>';
         }
 
         // Limit results if requested
@@ -107,18 +113,20 @@ class CREOL_Alumni_Shortcode {
         // Build HTML
         // Top-level container class varies by display mode
         $container_class = 'creol-alumni-grid';
-        if ( 'table' === $display ) {
-            $container_class .= ' creol-alumni-table-mode';
-        } else {
-            $container_class .= ' creol-alumni-grid-mode';
-        }
         if ( $dark ) {
             $container_class .= ' creol-alumni-dark';
         }
-
         if ( 'table' === $display ) {
+            $container_class .= ' creol-alumni-table-mode';
             return $this->render_table( $data );
+        } 
+        else if ( 'list' === $display ) {
+            $container_class .= ' creol-alumni-list-mode';
+            return $this->render_list( $data );
         }
+        else if ( 'grid' === $display ) {
+            $container_class .= ' creol-alumni-grid-mode';
+        }        
 
         // Set CSS variable for columns so CSS can adapt across modes
         $out = '<div class="' . esc_attr( $container_class ) . '" style="--columns: ' . esc_attr( $columns ) . ';" role="list" aria-label="Alumni directory">';
@@ -185,6 +193,32 @@ class CREOL_Alumni_Shortcode {
         }
 
         $out .= '</tbody></table></div>'; 
+
+        return $out;
+    }
+
+    private function render_list( $data ) {
+        $out = '<div class="creol-alumni-list-wrapper" role="region" aria-label="Alumni list">';
+        
+        foreach ( $data as $person ) {
+            // Validate person data before rendering
+            if ( ! $this->validate_person_data( $person ) ) {
+                error_log( 'CREOL Alumni API: Invalid person data structure - ' . print_r( $person, true ) );
+                continue;
+            }
+
+            $name = isset( $person['FirstLastName'] ) ? sanitize_text_field( wp_strip_all_tags( $person['FirstLastName'] ) ) : '';
+            $degree = isset( $person['Degree'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Degree'] ) ) : '';
+            $semester = isset( $person['Semester'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Semester'] ) ) : '';
+
+            $out .= '<div class="creol-alumni-list-item" itemprop="alumniOf" itemscope itemtype="https://schema.org/Person">';
+            $out .= '<span class="creol-alumni-list-name" itemprop="name">' . esc_html( $name ) . '</span>, ';
+            $out .= '<span class="creol-alumni-list-degree">' . esc_html( $degree ) . '</span>, ';
+            $out .= '<span class="creol-alumni-list-semester">' . esc_html( $semester ) . '</span>';
+            $out .= '</div>';
+        }
+
+        $out .= '</div>';
 
         return $out;
     }

@@ -115,7 +115,7 @@ Alumni shortcode attributes:
 | `year` | Graduation year to filter by | _(empty)_ | Any year in the (YYYY) format |
 | `degree` | Degree type to filter by | _(empty)_ | `all` (default), `ms`, `phd` |
 | `limit` | Maximum number of people to display | `0` (all) | Any positive integer |
-| `display` | Display mode | `grid` | `table`, `grid` |
+| `display` | Display mode | `grid` | `table`, `grid`, `list` |
 | `columns` | Number of grid columns | `3` | `1` to `8` |
 | `cache_ttl` | Cache duration in seconds | `300` (5 min) | Any positive integer |
 | `dark_mode` | Set theme to dark | `0` | `0` (off) or `1` (on) |
@@ -159,6 +159,12 @@ Displays a responsive table containing:
 - Program
 - Semester
 - Advisor
+
+### List Mode (alumni)
+Displays a plain list showing:
+- Name
+- Program
+- Semester
 
 ## Styling
 
@@ -221,6 +227,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 This plugin is licensed under GPL3. See the main plugin file for full license information.
 
 ## Changelog
+
+### 1.2.1
+- Updated alumni fields
+- New alumni display mode 'list'
+- Patched 'local network access' bug
 
 ### 1.2.0
 - Alumni shortcode support
