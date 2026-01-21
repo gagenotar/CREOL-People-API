@@ -96,16 +96,18 @@ class CREOL_People_Shortcode {
             return '<div class="creol-people-error">Could not retrieve people data.</div>';
         }
 
+        // Display a no people message to users
         if ( empty( $data ) ) {
-            return '<div class="creol-people-empty">No people found.</div>';
+            return '<p>There are currently no people listed for this position.</p>';
         }
 
         // Filter out invalid person data
         $data = array_filter( $data, array( $this, 'validate_person_data' ) );
         
+        // Display a no people message to users
         if ( empty( $data ) ) {
             error_log( 'CREOL People API: All person records failed validation | URL: ' . $url );
-            return '<div class="creol-people-empty">No valid people data found.</div>';
+            return '<p>There are currently no people listed for this position.</p>';
         }
 
         // Limit results if requested

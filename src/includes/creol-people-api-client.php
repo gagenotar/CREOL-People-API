@@ -52,10 +52,6 @@ class CREOL_People_API_Client {
             }
         }
 
-        if ( empty( $data ) ) {
-            return new WP_Error( 'creol_no_data', 'CREOL API returned no data' );
-        }
-
         return $data;
     }
 }
