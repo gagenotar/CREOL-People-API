@@ -31,18 +31,24 @@ function creol_proxy_headshot( WP_REST_Request $request ) {
         exit;
     }
 
+    // Get the preferred path from query parameter (passed by shortcode)
+    $preferred_path = $request->get_param( 'path' );
+    $valid_paths = array( '200x300Portrait', 'Original' );
+    if ( ! in_array( $preferred_path, $valid_paths, true ) ) {
+        $preferred_path = '';
+    }
+
     // Cache which upstream path works for this person
     $path_cache_key = 'creol_headshot_path_' . $person_id;
     $resolved_path  = get_transient( $path_cache_key );
 
-    // Ordered candidate paths
-    // CREOL API allows both URIs
-    $paths = $resolved_path
-        ? [ $resolved_path ]
-        : [
-            '200x300Portrait',
-            'Original',
-        ];
+    // Build attempt order: preferred first, then cached, then defaults
+    $paths = array_unique( array_filter( [
+        $preferred_path,
+        $resolved_path,
+        '200x300Portrait',
+        'Original',
+    ] ) );
 
     // Try each path until one works
     foreach ( $paths as $path ) {
@@ -68,11 +74,11 @@ function creol_proxy_headshot( WP_REST_Request $request ) {
         }
 
         // Set a cache for this working path
-        set_transient( $path_cache_key, $path, HOUR_IN_SECONDS * 6 );
+        set_transient( $path_cache_key, $path, 3 );
 
         header( 'Content-Type: image/jpeg' );
         header( 'Content-Length: ' . strlen( $body ) );
-        header( 'Cache-Control: public, max-age=' . ( HOUR_IN_SECONDS * 6 ) );
+        header( 'Cache-Control: public, max-age=' . ( 3 ) );
 
         // Output the image and exit to avoid default WP json encoding
         echo $body;
@@ -91,7 +97,7 @@ function creol_proxy_headshot( WP_REST_Request $request ) {
 
         header( 'Content-Type: image/jpeg' );
         header( 'Content-Length: ' . strlen( $body ) );
-        header( 'Cache-Control: public, max-age=' . ( HOUR_IN_SECONDS * 6 ) );
+        header( 'Cache-Control: public, max-age=' . ( 3 ) );
 
         // Output the image and exit to avoid default WP json encoding
         echo $body;

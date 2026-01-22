@@ -172,12 +172,25 @@ class CREOL_People_Shortcode {
         $room = isset( $person['Room'] ) ? sanitize_text_field( wp_strip_all_tags( $person['Room'] ) ) : '';
         $people_id = isset( $person['PeopleID'] ) ? intval( $person['PeopleID'] ) : 0;
 
+        $image_url = isset( $person['ImageURL'] ) ? $person['ImageURL'] : '';
+        $path_param = '200x300Portrait'; // default
+        
+        if ( ! empty( $image_url ) ) {
+            if ( strpos( $image_url, '/Original/' ) !== false ) {
+                $path_param = 'Original';
+            } elseif ( strpos( $image_url, '/200x300Portrait/' ) !== false ) {
+                $path_param = '200x300Portrait';
+            }
+        }
+
+        $headshot_url = rest_url( "creol-people/v1/person-headshot/{$people_id}?path=" . rawurlencode( $path_param ) );
+
         $out = '<article class="creol-person-card align-items-start" role="listitem" itemscope itemtype="https://schema.org/Person">';
         // In 'grid' display mode we exclude the image to show a compact grid of info
         if ( 'card' === $display && $people_id > 0 ) {
             $out .= '<div class="creol-person-image">';
             // Use WP REST API endpoint to serve headshot images
-            $out .= '<img src="' . esc_url( rest_url( "creol-people/v1/person-headshot/{$people_id}" ) ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" />';
+            $out .= '<img src="' . esc_url( $headshot_url ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" />';
             $out .= '</div>';
         }
         $out .= '<div class="creol-person-body align-items-start">';
