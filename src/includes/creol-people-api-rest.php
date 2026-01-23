@@ -74,11 +74,11 @@ function creol_proxy_headshot( WP_REST_Request $request ) {
         }
 
         // Set a cache for this working path
-        set_transient( $path_cache_key, $path, 3 );
+        set_transient( $path_cache_key, $path, HOUR_IN_SECONDS * 1 );
 
         header( 'Content-Type: image/jpeg' );
         header( 'Content-Length: ' . strlen( $body ) );
-        header( 'Cache-Control: public, max-age=' . ( 3 ) );
+        header( 'Cache-Control: public, max-age=' . ( HOUR_IN_SECONDS * 1 ) );
 
         // Output the image and exit to avoid default WP json encoding
         echo $body;
@@ -97,7 +97,7 @@ function creol_proxy_headshot( WP_REST_Request $request ) {
 
         header( 'Content-Type: image/jpeg' );
         header( 'Content-Length: ' . strlen( $body ) );
-        header( 'Cache-Control: public, max-age=' . ( 3 ) );
+        header( 'Cache-Control: public, max-age=' . ( HOUR_IN_SECONDS * 1 ) );
 
         // Output the image and exit to avoid default WP json encoding
         echo $body;
